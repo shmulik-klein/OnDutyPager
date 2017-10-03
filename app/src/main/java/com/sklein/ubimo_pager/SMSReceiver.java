@@ -15,13 +15,9 @@ public class SMSReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        SmsMessage[] messages;
-        String smsNumber = null;
-        String smsBody = null;
-
-        messages = Telephony.Sms.Intents.getMessagesFromIntent(intent);
-        smsNumber = messages[0].getOriginatingAddress();
-        smsBody = messages[0].getMessageBody();
+        SmsMessage[] messages = Telephony.Sms.Intents.getMessagesFromIntent(intent);
+        String smsNumber = messages[0].getOriginatingAddress();
+        String smsBody = messages[0].getMessageBody();
 
         // ignores SMSs which were sent outside of thw whitelist
         if (!smsNumber.equalsIgnoreCase(CABOT_NUMBER)) {
