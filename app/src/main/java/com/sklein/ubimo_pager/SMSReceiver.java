@@ -3,7 +3,7 @@ package com.sklein.ubimo_pager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
+import android.provider.Telephony;
 import android.telephony.SmsMessage;
 
 /**
@@ -15,20 +15,13 @@ public class SMSReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Bundle bundle = intent.getExtras();
-        SmsMessage[] smsm;
+        SmsMessage[] messages;
         String smsNumber = null;
         String smsBody = null;
 
-        if (null != bundle) {
-            Object[] pdus = (Object[]) bundle.get("pdus");
-            smsm = new SmsMessage[pdus.length];
-            for (int i = 0; i < smsm.length; i++) {
-                smsm[i] = SmsMessage.createFromPdu((byte[])pdus[i]);
-                smsNumber = smsm[i].getOriginatingAddress();
-                smsBody = smsm[i].getMessageBody().toString();
-            }
-        }
+        messages = Telephony.Sms.Intents.getMessagesFromIntent(intent);
+        smsNumber = messages[0].getOriginatingAddress();
+        smsBody = messages[0].getMessageBody();
 
         // ignores SMSs which were sent outside of thw whitelist
         if (!smsNumber.equalsIgnoreCase(CABOT_NUMBER)) {
