@@ -1,7 +1,5 @@
 package com.sklein.ubimo_pager;
 
-import android.app.NotificationManager;
-import android.content.Context;
 import android.content.Intent;
 import android.media.AudioAttributes;
 import android.media.MediaPlayer;
@@ -13,14 +11,12 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String CABOT_NUMBER = "+13476479587";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent smsIntent = getIntent();
         Bundle smsBundle = smsIntent.getExtras();
-        if (null != smsBundle && smsBundle.getString("sms_number").equalsIgnoreCase(CABOT_NUMBER)) {
+        if (null != smsBundle) {
             setContentView(R.layout.activity_main);
 
             final MediaPlayer player = MediaPlayer.create(this, R.raw.demo);

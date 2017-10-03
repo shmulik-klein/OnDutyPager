@@ -11,10 +11,12 @@ import android.telephony.SmsMessage;
  */
 
 public class SMSReceiver extends BroadcastReceiver {
+    private static final String CABOT_NUMBER = "+13476479587";
+
     @Override
     public void onReceive(Context context, Intent intent) {
         Bundle bundle = intent.getExtras();
-        SmsMessage[] smsm = null;
+        SmsMessage[] smsm;
         String smsNumber = null;
         String smsBody = null;
 
@@ -26,6 +28,11 @@ public class SMSReceiver extends BroadcastReceiver {
                 smsNumber = smsm[i].getOriginatingAddress();
                 smsBody = smsm[i].getMessageBody().toString();
             }
+        }
+
+        // ignores SMSs which were sent outside of thw whitelist
+        if (!smsNumber.equalsIgnoreCase(CABOT_NUMBER)) {
+            return;
         }
 
         Intent smsIntent = new Intent(context, MainActivity.class);
