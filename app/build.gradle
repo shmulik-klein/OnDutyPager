@@ -3,18 +3,24 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     buildToolsVersion "26.0.2"
+    project.archivesBaseName = "ubimo-pager";
     defaultConfig {
         applicationId "com.sklein.ubimo_pager"
         minSdkVersion 21
         targetSdkVersion 26
         versionCode 1
-        versionName "1.0"
+        versionName "0.0.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    output.outputFile = new File(output.outputFile.parent, output.outputFile.name.replace(".apk", "-" + defaultConfig.versionName + ".apk"))
+                }
+            }
         }
     }
 }
