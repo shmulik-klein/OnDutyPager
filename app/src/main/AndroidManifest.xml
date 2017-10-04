@@ -26,7 +26,10 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:showOnLockScreen="true"
+            android:screenOrientation="sensorPortrait" />
     </application>
 
 </manifest>
