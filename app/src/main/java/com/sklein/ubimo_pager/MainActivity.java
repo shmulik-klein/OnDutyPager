@@ -23,8 +23,8 @@ public class MainActivity extends AppCompatActivity {
             AudioAttributes attributes = new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_ALARM).build();
             player.setAudioAttributes(attributes);
             player.setLooping(true);
-            final ImageButton button = (ImageButton) findViewById(R.id.stop_btn);
-            button.setOnClickListener(new View.OnClickListener() {
+            final ImageButton btnStopAlert = (ImageButton) findViewById(R.id.btn_stop);
+            btnStopAlert.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     player.stop();
                     finish();
@@ -32,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
             });
 
             player.start();
-            TextView textView = (TextView) findViewById(R.id.txtview);
-            textView.setText(smsBundle.getString("sms_body"));
+            TextView txtMessage = (TextView) findViewById(R.id.txt_msg);
+            txtMessage.setText(smsBundle.getString("sms_body"));
         }
     }
 }

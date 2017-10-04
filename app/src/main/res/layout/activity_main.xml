@@ -7,14 +7,15 @@
     tools:context="com.sklein.ubimo_pager.MainActivity">
 
     <ImageButton
-        android:id="@+id/stop_btn"
-        android:layout_width="368dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/title_txt"
+        android:id="@+id/btn_stop"
+        android:layout_width="371dp"
+        android:layout_height="426dp"
+        android:layout_below="@+id/txt_title"
         android:layout_centerHorizontal="true"
         android:adjustViewBounds="true"
         android:background="@null"
-        android:scaleType="centerCrop"
+        android:cropToPadding="false"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -22,28 +23,36 @@
         app:srcCompat="@drawable/ziv" />
 
     <TextView
-        android:id="@+id/title_txt"
+        android:id="@+id/txt_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:fontFamily="sans-serif-condensed"
         android:text="Wake up! You're on a shift!"
         android:textAllCaps="true"
         android:textColor="#000000"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/stop_btn"
+        app:layout_constraintBottom_toTopOf="@+id/btn_stop"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/txtview"
+        android:id="@+id/txt_msg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/stop_btn"
-        android:maxLines="5"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/stop_btn"
+        android:fontFamily="sans-serif-condensed"
+        android:lines="5"
+        android:maxLines="7"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/stop_btn" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_stop"
+        app:layout_constraintVertical_bias="0.0" />
 </android.support.constraint.ConstraintLayout>
