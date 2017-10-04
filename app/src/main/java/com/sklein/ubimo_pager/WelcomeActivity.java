@@ -33,17 +33,17 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     private void checkForPermission(String[] permissions) {
-        ArrayList<String> permissions_to_ask = new ArrayList<String>();
+        ArrayList<String> permissionsToAsk = new ArrayList<String>();
         for (String permission : permissions) {
             int permissionStatus = ContextCompat.checkSelfPermission(this, permission);
             if (permissionStatus != PackageManager.PERMISSION_GRANTED) {
-                permissions_to_ask.add(permission);
+                permissionsToAsk.add(permission);
             }
         }
 
-        if (!permissions_to_ask.isEmpty()) {
+        if (!permissionsToAsk.isEmpty()) {
             ActivityCompat.requestPermissions(this,
-                    permissions_to_ask.toArray(new String[permissions_to_ask.size()]), REQUEST_CODE);
+                    permissionsToAsk.toArray(new String[permissionsToAsk.size()]), REQUEST_CODE);
         }
     }
 }
