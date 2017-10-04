@@ -1,7 +1,9 @@
 package com.sklein.ubimo_pager;
 
+import android.content.Context;
 import android.content.Intent;
 import android.media.AudioAttributes;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -19,14 +21,22 @@ public class MainActivity extends AppCompatActivity {
         if (null != smsBundle) {
             setContentView(R.layout.activity_main);
 
+            final AudioManager audio = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+            final int music = AudioManager.STREAM_MUSIC;
+            // TODO: handle isVolumeFixed == true
+            audio.setStreamVolume(music, audio.getStreamMaxVolume(music), 0);
+            // TODO: increase volume to max every sec
+
             final MediaPlayer player = MediaPlayer.create(this, R.raw.demo);
             AudioAttributes attributes = new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_ALARM).build();
             player.setAudioAttributes(attributes);
             player.setLooping(true);
+
             final ImageButton btnStopAlert = (ImageButton) findViewById(R.id.btn_stop);
             btnStopAlert.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     player.stop();
+                    // TODO: set voulum as before setStreamVolume
                     finish();
                 }
             });
