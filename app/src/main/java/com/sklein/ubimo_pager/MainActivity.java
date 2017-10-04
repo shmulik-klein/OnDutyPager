@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
             final int music = AudioManager.STREAM_MUSIC;
             // TODO: handle isVolumeFixed == true
             audio.setStreamVolume(music, audio.getStreamMaxVolume(music), 0);
-            // TODO: increase volume to max every sec
+            // TODO: increase volume until max every sec
 
             final MediaPlayer player = MediaPlayer.create(this, R.raw.demo);
             AudioAttributes attributes = new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_ALARM).build();
