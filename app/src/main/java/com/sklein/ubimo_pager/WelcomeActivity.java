@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class WelcomeActivity extends AppCompatActivity {
     public static final String[] NEEDED_PERMISSIONS = new String[]{
@@ -33,7 +34,7 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     private void checkForPermission(String[] permissions) {
-        ArrayList<String> permissionsToAsk = new ArrayList<String>();
+        List<String> permissionsToAsk = new ArrayList<String>();
         for (String permission : permissions) {
             int permissionStatus = ContextCompat.checkSelfPermission(this, permission);
             if (permissionStatus != PackageManager.PERMISSION_GRANTED) {
