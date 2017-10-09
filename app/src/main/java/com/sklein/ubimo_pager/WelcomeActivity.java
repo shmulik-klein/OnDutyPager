@@ -9,8 +9,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-public class WelcomeActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
 
+public class WelcomeActivity extends AppCompatActivity {
+    public static final String[] NEEDED_PERMISSIONS = new String[]{
+            Manifest.permission.RECEIVE_SMS,
+            Manifest.permission.READ_SMS
+    };
     private static final int REQUEST_CODE = 13;
 
     @Override
@@ -24,15 +30,21 @@ public class WelcomeActivity extends AppCompatActivity {
             }
         });
 
-        checkForPermission(Manifest.permission.RECEIVE_SMS);
-        checkForPermission(Manifest.permission.READ_SMS);
+        checkForPermission(NEEDED_PERMISSIONS);
     }
 
-    private void checkForPermission(String permission) {
-        final int permissionStatus = ContextCompat.checkSelfPermission(this, permission);
-        if (permissionStatus == PackageManager.PERMISSION_GRANTED) {
-            return;
+    private void checkForPermission(String[] permissions) {
+        List<String> permissionsToAsk = new ArrayList<String>();
+        for (String permission : permissions) {
+            int permissionStatus = ContextCompat.checkSelfPermission(this, permission);
+            if (permissionStatus != PackageManager.PERMISSION_GRANTED) {
+                permissionsToAsk.add(permission);
+            }
         }
-        ActivityCompat.requestPermissions(this, new String[]{permission}, REQUEST_CODE);
+
+        if (!permissionsToAsk.isEmpty()) {
+            ActivityCompat.requestPermissions(this,
+                    permissionsToAsk.toArray(new String[permissionsToAsk.size()]), REQUEST_CODE);
+        }
     }
 }
