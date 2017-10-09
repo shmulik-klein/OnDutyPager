@@ -16,17 +16,19 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
         super.onCreate(savedInstanceState);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+
         Intent smsIntent = getIntent();
         Bundle smsBundle = smsIntent.getExtras();
         if (null != smsBundle) {
             setContentView(R.layout.activity_main);
 
             final AudioManager audio = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-            final int music = AudioManager.STREAM_MUSIC;
             // TODO: handle isVolumeFixed == true
-            audio.setStreamVolume(music, audio.getStreamMaxVolume(music), 0);
+            final int currentVolume = audio.getStreamVolume(AudioManager.STREAM_MUSIC);
+            audio.setStreamVolume(AudioManager.STREAM_MUSIC,
+                    audio.getStreamMaxVolume(AudioManager.STREAM_MUSIC), 0);
             // TODO: increase volume until max every sec
 
             final MediaPlayer player = MediaPlayer.create(this, R.raw.demo);
@@ -38,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             btnStopAlert.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     player.stop();
-                    // TODO: set voulum as before setStreamVolume
+                    audio.setStreamVolume(AudioManager.STREAM_MUSIC, currentVolume, 0);
                     finish();
                 }
             });
