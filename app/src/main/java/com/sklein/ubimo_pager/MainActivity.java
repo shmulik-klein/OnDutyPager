@@ -1,11 +1,13 @@
 package com.sklein.ubimo_pager;
 
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
@@ -41,6 +43,9 @@ public class MainActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     player.stop();
                     audio.setStreamVolume(AudioManager.STREAM_MUSIC, currentVolume, 0);
+
+                    NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                    notificationManager.cancel(19980419);
                     finish();
                 }
             });
