@@ -11,7 +11,7 @@ import android.telephony.SmsMessage;
  */
 
 public class SMSReceiver extends BroadcastReceiver {
-    private static final String CABOT_NUMBER = "+13476479587";
+    private static final String CABOT_NUMBER = "13476479587";
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -20,7 +20,7 @@ public class SMSReceiver extends BroadcastReceiver {
         String smsBody = messages[0].getMessageBody();
 
         // ignores SMSs which were sent outside of thw whitelist
-        if (!smsNumber.equalsIgnoreCase(CABOT_NUMBER)) {
+        if (!smsNumber.equalsIgnoreCase(CABOT_NUMBER) && !smsNumber.equalsIgnoreCase("+" + CABOT_NUMBER)) {
             return;
         }
 
@@ -28,6 +28,7 @@ public class SMSReceiver extends BroadcastReceiver {
         smsIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         smsIntent.putExtra("sms_number", smsNumber);
         smsIntent.putExtra("sms_body", smsBody);
+
         context.startActivity(smsIntent);
     }
 }

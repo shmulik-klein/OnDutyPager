@@ -1,0 +1,7 @@
+<menu xmlns:androclass="http://schemas.android.com/apk/res/android" >
+    <item androclass:id="@+id/disable"
+        androclass:title="@string/disable"/>
+    <item androclass:id="@+id/enable"
+        androclass:visible="false"
+        androclass:title="@string/enable"/>
+</menu>

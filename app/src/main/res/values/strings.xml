@@ -3,4 +3,8 @@
     <string name="sms_msg">Wake up! You\'re on a shift!</string>
     <string name="close">Close</string>
     <string name="sleep_msg">Sleep tight!</string>
+    <string name="disable">Disable</string>
+    <string name="disable_min">Disable for (in minutes):</string>
+    <string name="disabled">disabled</string>
+    <string name="enable">Enable</string>
 </resources>
